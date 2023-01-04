@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+# React CRUD API Client App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+To setup the app, go to the app folder `react_client` and execute the following commands:
 
-### `npm start`
+    npm install
+    npm start
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This will install all the dependencies and run a server in development mode on [http://localhost:3000](http://localhost:3000).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This App uses mainly the following npm packages:
+- React Hook Form
+- Yup validator
+- Bulma CSS
 
-### `npm test`
+## Usage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+In the `App.jsx` inside the src folder, various arguments are used and passed to the app elements as props.
+In particular the base url, with the various urls parameters are used to make fetch calls to an API.
 
-### `npm run build`
+## API Endpoints
+In this case the value used are an example and fetch the data to a localhost Django web-server that serves an API with the following endpoints.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### **{base_url}/elements**
+- GET: list of elements is returned
+- POST: a new element is added
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### **{base_url}/elements/{element_id}**
+- PUT: modifies the element data, selecting it by his element_id
+- DELETE: deletes the element with id of element_id
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## App Pages
+The default pages for the app are mapped with the following urls:
 
-### `npm run eject`
+### **{app_base_url}/**
+Shows the home page, with the API base url displayed and a link to the element list.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### **{app_base_url}/elements**
+Shows the element list fetched with a GET API call.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### **{app_base_url}/edit/element_id**
+Shows a page to edit the element with element_id, via a PUT call to the API.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### **{app_base_url}/add**
+Shows a page to add a new element via a POST call to the API.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Customization
+Altough the components are made to be flexible enough without editing a lot of code, some of them needs to be fixed/modified, especially the `Form.jsx` that has all the Yup validators and forms element specifically made for the data used for the example API.
 
-## Learn More
+An example of the JSON data fetched by example the API is:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```JSON
+    {
+        "id": 56,
+        "name": "Kiwi",
+        "description": "A beautiful 🥝",
+        "element_type": "C"
+    }
+```
+And the yup validation Schema is the following:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```JavaScript
+  const schema = yup
+    .object({
+      name: yup.string().required(),
+      description: yup.string().required(),
+      element_type: yup.mixed().oneOf(["A", "B", "C", "D"]),
+    })
+    .required();
+```
+An example of the form (in this case the element name) is:
 
-### Code Splitting
+```JavaScript
+          <div className="field">
+            <div className="control">
+              <input
+                className="input"
+                placeholder="name"
+                {...register("name")}
+              />
+            </div>
+            <p className="help is-danger">{errors.name?.message}</p>
+          </div>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The register string passed,the placeholder attribute and other small tweaks are necessary to adapt to your data.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Improvements to make
+- [ ] Edit Form.jsx to generalize fetched JSON data from the API (avoid hardcoding)
+- [ ] Add a way to setting up the form validation more easily
+- [ ] Add visual feedbacks when editing/adding/deleting data 
+- [ ] Improve app navigation and layout

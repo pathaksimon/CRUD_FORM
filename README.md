@@ -1,5 +1,13 @@
 # React CRUD API Client App
 
+![immagine](https://user-images.githubusercontent.com/67196406/210624907-57ab5337-ab01-4238-bd0d-a67306907949.png)
+
+![immagine](https://user-images.githubusercontent.com/67196406/210624999-846e2b24-686f-4adc-aa84-6961d6cbe64d.png)
+
+![immagine](https://user-images.githubusercontent.com/67196406/210625070-e20bd03a-60d9-4993-8935-bc442bca076d.png)
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Setup

@@ -1,14 +1,19 @@
 # React CRUD API Client App
+A simple React App for C.R.U.D. operations on data from a REST API.
+## Preview
+<img src="https://user-images.githubusercontent.com/67196406/210624907-57ab5337-ab01-4238-bd0d-a67306907949.png" width="500">
 
-![immagine](https://user-images.githubusercontent.com/67196406/210624907-57ab5337-ab01-4238-bd0d-a67306907949.png)
+<img src="https://user-images.githubusercontent.com/67196406/210624999-846e2b24-686f-4adc-aa84-6961d6cbe64d.png" width="500">
 
-![immagine](https://user-images.githubusercontent.com/67196406/210624999-846e2b24-686f-4adc-aa84-6961d6cbe64d.png)
+<img src="https://user-images.githubusercontent.com/67196406/210625070-e20bd03a-60d9-4993-8935-bc442bca076d.png" width="500">
 
-![immagine](https://user-images.githubusercontent.com/67196406/210625070-e20bd03a-60d9-4993-8935-bc442bca076d.png)
-
-
-
+## Packages Used
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+This App uses mainly the following npm packages:
+- React Hook Form
+- Yup validator
+- Bulma CSS
 
 ## Setup
 
@@ -18,11 +23,6 @@ To setup the app, go to the app folder `react_client` and execute the following 
     npm start
 
 This will install all the dependencies and run a server in development mode on [http://localhost:3000](http://localhost:3000).
-
-This App uses mainly the following npm packages:
-- React Hook Form
-- Yup validator
-- Bulma CSS
 
 ## Usage
 
@@ -96,7 +96,9 @@ An example of the form (in this case the element name) is:
 
 The register string passed,the placeholder attribute and other small tweaks are necessary to adapt to your data.
 
-## Improvements to make
+## Improvements to Make
+- [ ] Add code comments and improve documentation
+- [ ] Use better React patterns to reduce passed props and reduce written code
 - [ ] Edit Form.jsx to generalize fetched JSON data from the API (avoid hardcoding)
 - [ ] Add a way to setting up the form validation more easily
 - [ ] Add visual feedbacks when editing/adding/deleting data 

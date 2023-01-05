@@ -21,8 +21,8 @@ This App uses mainly the following npm packages:
 - Bulma CSS
 
 ## Setup
-
-To setup the app, go to the app folder `react_client` and execute the following commands:
+Node.js and Node Package Manager (NPM) are required to run and build this project.
+To setup the app, while inside the project folder, execute the following commands:
 
     npm install
     npm start

@@ -11,6 +11,7 @@ A simple React App for C.R.U.D. operations on data from a REST API.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 This App uses mainly the following npm packages:
+- React DOM Router
 - React Hook Form
 - Yup validator
 - Bulma CSS

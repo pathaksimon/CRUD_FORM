@@ -12,6 +12,7 @@ export default function ElementEdit(props) {
     return (
       <Form
         base_url={props.base_url}
+        home_url={props.home_url}
         detail_url={props.detail_url}
         updateDataAPI={props.updateDataAPI}
       />

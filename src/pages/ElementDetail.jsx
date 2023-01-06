@@ -13,7 +13,7 @@ export default function ElementDetail(props) {
 
   const deleteRedirect = (base_url, id) => {
     props.deleteDataAPI(base_url, id);
-    navigate(props.detail_url);
+    navigate(props.home_url + '/' + props.detail_url);
   };
 
   return (
@@ -23,6 +23,7 @@ export default function ElementDetail(props) {
         <Element
           key={element.id}
           base_url={props.base_url}
+          home_url={props.home_url}
           detail_url={props.detail_url}
           edit_url={props.edit_url}
           details_button={false}

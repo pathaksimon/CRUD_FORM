@@ -37,10 +37,10 @@ export default function Form(props) {
     if (props.element_id) {
       console.log("Updating:");
       console.log(
-        "to " + props.base_url + props.detail_url + "/" + props.element_id
+        "to " + props.base_url + '/' + props.detail_url + "/" + props.element_id
       );
       props.updateDataAPI(
-        props.base_url + props.detail_url,
+        props.base_url + '/' + props.detail_url,
         data,
         props.element_id,
         "PUT"
@@ -48,11 +48,11 @@ export default function Form(props) {
     } else {
       console.log("Posting:");
       console.log(
-        "to " + props.base_url + props.detail_url + "/" + props.element_id
+        "to " + props.base_url + '/' + props.detail_url + "/" + props.element_id
       );
-      props.updateDataAPI(props.base_url + props.detail_url, data, "", "POST");
+      props.updateDataAPI(props.base_url + '/' + props.detail_url, data, "", "POST");
     }
-    navigate(props.detail_url);
+    navigate(props.home_url + '/' + props.detail_url);
   };
   //console.log(errors);
   return (

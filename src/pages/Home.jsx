@@ -20,7 +20,7 @@ export default function SharedLayout(props) {
         <span className="is-italic">{props.base_url}</span>
       </p>
       <div className="buttons">
-        <Link to={props.list_url} className="button is-light is-link">
+        <Link to={props.home_url + '/' + props.list_url} className="button is-light is-link">
           Go to the Elements List
         </Link>
       </div>

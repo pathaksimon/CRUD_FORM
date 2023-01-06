@@ -29,18 +29,18 @@ export default function Element(props) {
           {detail ? (
             <Link
               className="button is-link is-light"
-              to={props.detail_url + "/" + props.element.id}
+              to={props.home_url + "/" + props.detail_url + '/' + props.element.id}
             >
               Details 🔎
             </Link>
           ) : (
-            <Link className="button is-light" to={props.detail_url}>
+            <Link className="button is-light" to={props.home_url + '/' + props.detail_url}>
               Go Back 🔙
             </Link>
           )}
           <Link
             className="button is-light is-success"
-            to={props.edit_url + "/" + props.element.id}
+            to={props.home_url + "/" + props.edit_url + "/" + props.element.id}
           >
             Edit ✏️
           </Link>
@@ -48,7 +48,7 @@ export default function Element(props) {
             className="button is-danger is-light"
             onClick={() =>
               props.deleteDataAPI(
-                props.base_url + props.detail_url,
+                props.base_url + '/' + props.detail_url,
                 props.element.id
               )
             }

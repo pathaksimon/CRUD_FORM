@@ -15,20 +15,21 @@ function App() {
   const detail_title = "Element Detail";
   const edit_title = "Edit Element";
   const add_title = "Add Element";
+
   const base_url = "http://127.0.0.1:8000/api";
 
-  const home_url = "/";
-  const list_url = "/elements";
+  const home_url = "/app/react";
+  const list_url = "elements";
   const detail_url = "/:element_id";
-  const edit_url = "/edit";
-  const add_url = "/add";
+  const edit_url = "edit";
+  const add_url = "add";
 
   const [elements, setElements] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     //NOTE: React in Strict Mode (when developing and not in deployment) calls this twice!
-    getDataAPI(base_url + list_url);
+    getDataAPI(base_url + "/" + list_url);
   }, [base_url, list_url]);
 
   const getDataAPI = (url) => {
@@ -147,16 +148,23 @@ function App() {
         <Route path={home_url} element={<SharedLayout app_title={app_title} />}>
           <Route
             index
-            element={<Home base_url={base_url} list_url={list_url} />}
+            element={
+              <Home
+                base_url={base_url}
+                home_url={home_url}
+                list_url={list_url}
+              />
+            }
           />
           <Route
-            path={list_url}
+            path={home_url + "/" + list_url}
             element={
               <ElementsList
                 title={list_title}
                 data={elements}
                 getDataAPI={getDataAPI}
                 deleteDataAPI={deleteDataAPI}
+                home_url={home_url}
                 base_url={base_url}
                 detail_url={list_url}
                 edit_url={edit_url}
@@ -166,7 +174,7 @@ function App() {
             }
           />
           <Route
-            path={list_url + detail_url}
+            path={home_url + "/" + list_url + detail_url}
             element={
               <ElementDetail
                 title={detail_title}
@@ -174,13 +182,14 @@ function App() {
                 findElement={findElement}
                 deleteDataAPI={deleteDataAPI}
                 base_url={base_url}
+                home_url={home_url}
                 detail_url={list_url}
                 edit_url={edit_url}
               />
             }
           />
           <Route
-            path={edit_url + detail_url}
+            path={home_url + "/" + edit_url + detail_url}
             element={
               <ElementEdit
                 title={edit_title}
@@ -188,22 +197,27 @@ function App() {
                 findElement={findElement}
                 updateDataAPI={updateDataAPI}
                 base_url={base_url}
+                home_url={home_url}
                 detail_url={list_url}
               />
             }
           />
           <Route
-            path={add_url}
+            path={home_url + "/" + add_url}
             element={
               <ElementAdd
                 title={add_title}
                 updateDataAPI={updateDataAPI}
                 base_url={base_url}
+                home_url={home_url}
                 detail_url={list_url}
               />
             }
           />
-          <Route path="*" element={<NotFound home_url={home_url} />} />
+          <Route
+            path={home_url + "/" + "*"}
+            element={<NotFound home_url={home_url} />}
+          />
         </Route>
       </Routes>
     </React.Fragment>

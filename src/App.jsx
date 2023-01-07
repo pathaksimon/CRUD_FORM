@@ -10,27 +10,32 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 
 function App() {
-  const app_title = "React CRUD Client";
-  const list_title = "Elements List";
-  const detail_title = "Element Detail";
-  const edit_title = "Edit Element";
-  const add_title = "Add Element";
+  const titles = {
+    app_title: "React CRUD Client",
+    app_element_list_title: "Elements List",
+    app_detail_title: "Element Detail",
+    app_edit_title: "Edit Element",
+    app_add_title: "Add Element",
+  };
 
-  const base_url = "http://127.0.0.1:8000/api";
-
-  const home_url = "/app/react";
-  const list_url = "elements";
-  const detail_url = "/:element_id";
-  const edit_url = "edit";
-  const add_url = "add";
+  const urls = {
+    api_base_url: "http://127.0.0.1:8000/api",
+    api_element_list_url: "/elements",
+    // api_get_post_element_list_url: "http://127.0.0.1:8000/api/elements",
+    app_home_url: "/app/react",
+    app_list_url: "/elements",
+    app_element_id_url: "/:element_id",
+    app_edit_url: "/edit",
+    app_add_url: "/add",
+  };
 
   const [elements, setElements] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     //NOTE: React in Strict Mode (when developing and not in deployment) calls this twice!
-    getDataAPI(base_url + "/" + list_url);
-  }, [base_url, list_url]);
+    getDataAPI(urls.api_base_url + urls.api_element_list_url);
+  }, [urls.api_base_url, urls.api_element_list_url]);
 
   const getDataAPI = (url) => {
     setLoading(true);
@@ -38,7 +43,7 @@ function App() {
     fetch(url)
       .then((response) => {
         if (!response.ok) {
-          console.log("Response: " + response);
+          console.log("Response: " + response.json());
           throw Error(response.statusText);
         }
         return response.json();
@@ -60,7 +65,7 @@ function App() {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
+          console.log(response.json());
           throw Error(response.statusText);
         } else {
           setElements((prevElements) => {
@@ -93,8 +98,9 @@ function App() {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log("Obtained Response: " + response);
-          console.log("While trying to update/post data: " + data_dict);
+          console.log("Obtained Response: " + response.json());
+          console.log("While trying to update/post data: ");
+          console.log(data_dict);
           throw Error(response.statusText);
         }
         return response.json();
@@ -103,9 +109,8 @@ function App() {
         if (is_post) {
           setElements((prevElements) => {
             const newElements = [...prevElements, data];
-            console.log(
-              "Created element with id " + data.id + " with name: " + data.name
-            );
+            console.log("Created element with id " + data.id + " with data: ");
+            console.log(data);
             setLoading(false);
             return newElements;
           });
@@ -118,9 +123,8 @@ function App() {
                 return data;
               }
             });
-            console.log(
-              "Updated element with id " + id + " with name: " + data.name
-            );
+            console.log("Updated element with id " + id + " with data: ");
+            console.log(data);
             setLoading(false);
             return newElements;
           });
@@ -145,78 +149,63 @@ function App() {
   return (
     <React.Fragment>
       <Routes>
-        <Route path={home_url} element={<SharedLayout app_title={app_title} />}>
+        <Route
+          path={urls.app_home_url}
+          element={<SharedLayout app_title={titles.app_title} />}
+        >
+          <Route index element={<Home urls={urls} />} />
           <Route
-            index
-            element={
-              <Home
-                base_url={base_url}
-                home_url={home_url}
-                list_url={list_url}
-              />
-            }
-          />
-          <Route
-            path={home_url + "/" + list_url}
+            path={urls.app_home_url + urls.app_list_url}
             element={
               <ElementsList
-                title={list_title}
+                title={titles.app_element_list_title}
                 data={elements}
                 getDataAPI={getDataAPI}
                 deleteDataAPI={deleteDataAPI}
-                home_url={home_url}
-                base_url={base_url}
-                detail_url={list_url}
-                edit_url={edit_url}
-                add_url={add_url}
+                urls={urls}
                 loading={loading}
               />
             }
           />
           <Route
-            path={home_url + "/" + list_url + detail_url}
+            path={
+              urls.app_home_url + urls.app_list_url + urls.app_element_id_url
+            }
             element={
               <ElementDetail
-                title={detail_title}
+                title={titles.app_detail_title}
                 data={elements}
                 findElement={findElement}
                 deleteDataAPI={deleteDataAPI}
-                base_url={base_url}
-                home_url={home_url}
-                detail_url={list_url}
-                edit_url={edit_url}
+                urls={urls}
               />
             }
           />
           <Route
-            path={home_url + "/" + edit_url + detail_url}
+            path={urls.app_home_url + urls.app_edit_url + urls.app_element_id_url}
             element={
               <ElementEdit
-                title={edit_title}
+                title={titles.app_edit_title}
                 data={elements}
                 findElement={findElement}
                 updateDataAPI={updateDataAPI}
-                base_url={base_url}
-                home_url={home_url}
-                detail_url={list_url}
+                urls={urls}
               />
             }
           />
           <Route
-            path={home_url + "/" + add_url}
+            path={urls.app_home_url + urls.app_add_url}
             element={
               <ElementAdd
-                title={add_title}
+                title={titles.app_add_title}
                 updateDataAPI={updateDataAPI}
-                base_url={base_url}
-                home_url={home_url}
-                detail_url={list_url}
+                urls={urls}
               />
             }
           />
           <Route
-            path={home_url + "/" + "*"}
-            element={<NotFound home_url={home_url} />}
+            path={urls.app_home_url + "/" + "*"}
+            element={<NotFound urls={urls} />}
           />
         </Route>
       </Routes>

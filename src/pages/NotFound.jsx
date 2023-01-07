@@ -7,7 +7,7 @@ export default function SharedLayout(props) {
       <h2 className="mt-4">404 Page not Found</h2>
       <p>It seems that this page doesn't exist 😢</p>
       <div className="buttons">
-        <Link to={props.home_url} className="button is-light is-link">
+        <Link to={props.urls.app_home_url} className="button is-light is-link">
           Go to Home Page
         </Link>
       </div>

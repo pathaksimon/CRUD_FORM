@@ -17,10 +17,10 @@ export default function SharedLayout(props) {
         <br />
         <br />
         The current base URL for the API is:{" "}
-        <span className="is-italic">{props.base_url}</span>
+        <span className="is-italic">{props.urls.api_base_url}</span>
       </p>
       <div className="buttons">
-        <Link to={props.home_url + '/' + props.list_url} className="button is-light is-link">
+        <Link to={props.urls.app_home_url + props.urls.app_list_url} className="button is-light is-link">
           Go to the Elements List
         </Link>
       </div>

@@ -14,9 +14,7 @@ export default function ElementEdit(props) {
   function renderDataForm() {
     return (
       <Form
-        base_url={props.base_url}
-        home_url={props.home_url}
-        detail_url={props.detail_url}
+        urls={props.urls}
         element={element}
         element_id={element_id}
         updateDataAPI={props.updateDataAPI}

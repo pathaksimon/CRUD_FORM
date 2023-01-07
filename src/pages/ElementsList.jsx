@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function ElementList(props) {
   const getData = () => {
-    props.getDataAPI(props.base_url + '/' + props.detail_url);
+    props.getDataAPI(props.urls.api_base_url +  props.urls.api_element_list_url);
   };
   React.useEffect(() => {
     getData();
@@ -15,13 +15,10 @@ export default function ElementList(props) {
       return (
         <Element
           key={element.id}
-          base_url={props.base_url}
-          home_url={props.home_url}
-          detail_url={props.detail_url}
-          edit_url={props.edit_url}
           details_button={true}
           element={element}
           deleteDataAPI={props.deleteDataAPI}
+          urls = {props.urls}
         />
       );
     });
@@ -31,7 +28,7 @@ export default function ElementList(props) {
     <React.Fragment>
       <h2 className="mt-4">{props.title}</h2>
       <div className="buttons">
-        <Link to={props.home_url + '/' + props.add_url} className="button is-light is-success">
+        <Link to={props.urls.app_home_url + props.urls.app_add_url} className="button is-light is-success">
           Add Element ➕
         </Link>
       </div>

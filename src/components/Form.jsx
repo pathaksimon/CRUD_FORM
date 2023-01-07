@@ -5,8 +5,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function Form(props) {
+  console.log("rendering form");
   const navigate = useNavigate();
-  const element = props.element;
+  const element = props.element
+  const element_id = props.element_id
+
+  //SCHEMA FOR VALIDATION OF THE FORM -> CHANGE THIS FOR YOUR OWN FORM
   const schema = yup
     .object({
       name: yup.string().required(),
@@ -34,31 +38,43 @@ export default function Form(props) {
 
   const onSubmit = (data) => {
     console.log(data);
-    if (props.element_id) {
+    if (element_id) {
       console.log("Updating:");
       console.log(
-        "to " + props.base_url + '/' + props.detail_url + "/" + props.element_id
+        "to " +
+          props.urls.api_base_url +
+          props.urls.api_element_list_url +
+          "/" +
+          element_id
       );
       props.updateDataAPI(
-        props.base_url + '/' + props.detail_url,
+        props.urls.api_base_url + props.urls.api_element_list_url,
         data,
-        props.element_id,
+        element_id,
         "PUT"
       );
     } else {
       console.log("Posting:");
       console.log(
-        "to " + props.base_url + '/' + props.detail_url + "/" + props.element_id
+        "to " + props.urls.api_base_url + props.urls.api_element_list_url
       );
-      props.updateDataAPI(props.base_url + '/' + props.detail_url, data, "", "POST");
+      props.updateDataAPI(
+        props.urls.api_base_url + props.urls.api_element_list_url,
+        data,
+        "",
+        "POST"
+      );
     }
-    navigate(props.home_url + '/' + props.detail_url);
+    navigate(props.urls.app_home_url + props.urls.app_list_url);
   };
   //console.log(errors);
   return (
     <React.Fragment>
       <div className="box">
         <form onSubmit={handleSubmit(onSubmit)}>
+          {
+            //EVERY INPUT IS WRAPPEN IN A FIELD DIV, A CONTROL DIV AND THEN NEED TO BE REGISTERED WITH HIS OWN NAME FROM THE SCHEMA
+          }
           <div className="field">
             <div className="control">
               <input
@@ -92,7 +108,10 @@ export default function Form(props) {
             <p className="help is-danger">{errors.element_type?.message}</p>
           </div>
           <div className="buttons">
-            <Link to={props.detail_url} className="button is-light">
+            <Link
+              to={props.urls.app_home_url + props.urls.app_list_url}
+              className="button is-light"
+            >
               Go Back 🔙
             </Link>
             <button className="button is-link" type="submit">

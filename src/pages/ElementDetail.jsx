@@ -3,8 +3,8 @@ import Element from "../components/Element.jsx";
 import { useParams, useNavigate } from "react-router-dom";
 
 export default function ElementDetail(props) {
-  const { element_id } = useParams();
   const navigate = useNavigate();
+  const { element_id } = useParams();
   const [element, setElement] = React.useState({});
 
   React.useEffect(() => {
@@ -13,7 +13,7 @@ export default function ElementDetail(props) {
 
   const deleteRedirect = (base_url, id) => {
     props.deleteDataAPI(base_url, id);
-    navigate(props.home_url + '/' + props.detail_url);
+    navigate(props.urls.app_home_url + props.urls.app_list_url);
   };
 
   return (
@@ -22,10 +22,7 @@ export default function ElementDetail(props) {
       {element ? (
         <Element
           key={element.id}
-          base_url={props.base_url}
-          home_url={props.home_url}
-          detail_url={props.detail_url}
-          edit_url={props.edit_url}
+          urls={props.urls}
           details_button={false}
           element={element}
           deleteDataAPI={deleteRedirect}

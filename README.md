@@ -1,129 +1,70 @@
-# React CRUD API Client App
-
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white) ![React Hook Form](https://img.shields.io/badge/React%20Hook%20Form-%23EC5990.svg?style=for-the-badge&logo=reacthookform&logoColor=white) ![Bulma](https://img.shields.io/badge/bulma-00D0B1?style=for-the-badge&logo=bulma&logoColor=white)
-
-A simple React App for C.R.U.D. operations on data from an external REST API.
-
-## Preview
-
-<img src="https://user-images.githubusercontent.com/67196406/210624907-57ab5337-ab01-4238-bd0d-a67306907949.png" width="500">
-
-<img src="https://user-images.githubusercontent.com/67196406/210624999-846e2b24-686f-4adc-aa84-6961d6cbe64d.png" width="500">
-
-<img src="https://user-images.githubusercontent.com/67196406/210625070-e20bd03a-60d9-4993-8935-bc442bca076d.png" width="500">
-
-## Packages Used
+# Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-This App uses mainly the following npm packages:
+## Available Scripts
 
-- React DOM Router
-- React Hook Form
-- Yup validator
-- Bulma CSS
+In the project directory, you can run:
 
-## Setup
+### `npm start`
 
-Node.js and Node Package Manager (NPM) are required to run and build this project.
-To setup the app, while inside the project folder, execute the following commands:
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-```Shell
-  npm install
-  npm start
-```
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-This will install all the dependencies and run a server in development mode on [http://localhost:3000](http://localhost:3000).
+### `npm test`
 
-## Usage
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-In the `App.jsx` inside the src folder, various arguments are used and passed to the app elements as props.
-In particular the base url, with the various urls parameters are used to make fetch calls to an API.
+### `npm run build`
 
-## API Endpoints
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-In this case the value used are an example and fetch the data to a localhost Django web-server that serves an API with the following endpoints.
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-### **{base_url}/elements**
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-- GET: list of elements is returned
-- POST: a new element is added
+### `npm run eject`
 
-### **{base_url}/elements/{element_id}**
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-- PUT: modifies the element data, selecting it by his element_id
-- DELETE: deletes the element with id of element_id
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-## App Pages
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-The default pages for the app are mapped with the following urls:
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-### **{app_base_url}/**
+## Learn More
 
-Shows the home page, with the API base url displayed and a link to the element list.
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-### **{app_base_url}/elements**
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-Shows the element list fetched with a GET API call.
+### Code Splitting
 
-### **{app_base_url}/edit/element_id**
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-Shows a page to edit the element with element_id, via a PUT call to the API.
+### Analyzing the Bundle Size
 
-### **{app_base_url}/add**
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-Shows a page to add a new element via a POST call to the API.
+### Making a Progressive Web App
 
-## Customization
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-Altough the components are made to be flexible enough without editing a lot of code, some of them needs to be fixed/modified, especially the `Form.jsx` that has all the Yup validators and forms element specifically made for the data used for the example API.
+### Advanced Configuration
 
-An example of the JSON data fetched by example the API is:
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-```JSON
-    {
-        "id": 56,
-        "name": "Kiwi",
-        "description": "A beautiful 🥝",
-        "element_type": "C"
-    }
-```
+### Deployment
 
-And the yup validation Schema is the following:
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-```JavaScript
-  const schema = yup
-    .object({
-      name: yup.string().required(),
-      description: yup.string().required(),
-      element_type: yup.mixed().oneOf(["A", "B", "C", "D"]),
-    })
-    .required();
-```
+### `npm run build` fails to minify
 
-An example of the form (in this case the element name) is:
-
-```JavaScript
-          <div className="field">
-            <div className="control">
-              <input
-                className="input"
-                placeholder="name"
-                {...register("name")}
-              />
-            </div>
-            <p className="help is-danger">{errors.name?.message}</p>
-          </div>
-  ```
-
-The register string passed,the placeholder attribute and other small tweaks are necessary to adapt to your data.
-
-## Improvements to Make
-
-- [x] Reduce props passed for urls
-- [ ] Add code comments and improve documentation
-- [ ] Use better React patterns to reduce passed props and reduce written code
-- [ ] Edit Form.jsx to generalize fetched JSON data from the API (avoid hardcoding)
-- [ ] Add a way to setting up the form validation more easily
-- [ ] Add visual feedbacks when editing/adding/deleting data  
-- [ ] Improve app navigation and layout
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
